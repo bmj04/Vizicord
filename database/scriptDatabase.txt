@@ -1,0 +1,66 @@
+CREATE DATABASE IF NOT EXISTS apollon;
+use apollon;
+CREATE TABLE IF NOT EXISTS users (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  username VARCHAR(45) NOT NULL,
+  email VARCHAR(45) NOT NULL,
+  password VARCHAR(45) NOT NULL,
+  reseauTiters VARCHAR(45),
+  playlistId INT,
+  pinned INT,
+  pfp VARCHAR(255),
+  admin_token VARCHAR(255)
+  
+);
+
+CREATE TABLE IF NOT EXISTS posts (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  author_Id INT,
+  name VARCHAR(45) NOT NULL,
+  type VARCHAR(45) NOT NULL,
+  views INT DEFAULT 0,
+  likes INT DEFAULT 0,
+  status VARCHAR(45) NOT NULL,
+  category VARCHAR(45) NOT NULL,
+  description VARCHAR(45) NOT NULL,	
+  title VARCHAR(255) NOT NULL,
+  file_source VARCHAR(255),
+  FOREIGN KEY (author_id) REFERENCES users(id)
+);
+-- inclure l'admin avant le lancement du site avec  INSERT into users(username, email, password, pfp, admin_token) VALUES('admin', 'admin@vizicord.com', 'secret()password', 'http://localhost/Vizicord/pfps/defaultPfp.jpg');
+-- utilisateur de la database: apollon, le mot de passe est vide et le nom de la base de donnee est apollon
+/* pas besoin de ces tables
+CREATE TABLE IF NOT EXISTS playlists (
+  playlistId INT AUTO_INCREMENT PRIMARY KEY,
+  userId INT,
+  postiD INT,
+  playlistName VARCHAR(45) NOT NULL,
+  FOREIGN KEY (postID) REFERENCES posts(id),
+  FORTEIGN KEY (userId) REFERENCES users(id)
+);
+
+CREATE TABLE IF NOT EXISTS friends (
+  userId INT,
+  friendId INT,
+  PRIMARY KEY (userId, friendId),
+  FOREIGN KEY (userId) REFERENCES users(id),
+  FOREIGN KEY (friendId) REFERENCES users(id)
+);
+
+CREATE TABLE IF NOT EXISTS likedPosts (
+  userId INT,
+  postId INT,
+  PRIMARY KEY (userId, postId),
+  FOREIGN KEY (userId) REFERENCES users(id),
+  FOREIGN KEY (postId) REFERENCES posts(id)
+);
+CREATE TABLE IF NOT EXISTS notifications (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  type VARCHAR(45),
+  postId INT,
+  userId INT,
+  targetId INT,
+  `read` TINYINT(1)
+);
+*/
+
